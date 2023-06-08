@@ -1,25 +1,42 @@
-import logo from './logo.svg';
+import React , {useState} from 'react'; 
 import './App.css';
+import { connect } from 'react-redux';
 
-function App() {
+
+function App(props) {
+
+  // const [amount, setAmount] = useState(100000)
+
+  // const onDeposit = () => {
+  //   setAmount(amount + 10000)
+  // }
+
+  // const onWithdraw = () => {
+  //   setAmount(amount - 10000)
+  // }
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>Amount : {props.amount}</p>
+      <button onClick={props.onDeposit}>Deposit</button>
+      <button onClick={props.onWithdraw}>Withdraw</button>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return{
+    amount:state.amount
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return{
+    onDeposit: () => dispatch ({type:"INCREMENT",value:10000}),
+    onWithdraw: () => dispatch ({type: "DECREMENT" , value:10000})
+  }
+}
+
+export default connect(mapStateToProps , mapDispatchToProps)(App);
