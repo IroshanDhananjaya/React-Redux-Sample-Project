@@ -1,5 +1,7 @@
 const initialState = {
-    amount:100000
+    amount:100000,
+    name:"Iroshan",
+    age:0
 }
 
 const reducer = (state = initialState , action) => {
@@ -12,6 +14,9 @@ const reducer = (state = initialState , action) => {
         case "DECREMENT":
             newState.amount -= action.value;
             break;
+            case "Name":
+                newState.name = action.value
+                newState.age = action.age
         default:
             break;
     }
